@@ -1,0 +1,33 @@
+{
+    "name": "purplecommerce/ProductEnquiry",
+    "description": "A module which allow to add ProductEnquiry and display them through widget",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "keywords": [
+        "magento 2",
+        "magento",
+        "ProductEnquiry",
+        "upload ProductEnquiry",
+        "add ProductEnquiry",
+        "how to add ProductEnquiry in magento 2"
+    ],
+    "type": "magento2-module",
+    "version": "1.0.1",
+    "license": [
+      "OSL-3.0",
+      "AFL-3.0"
+    ],
+    "authors": [
+        {
+            "name": "Nitin Sharma",
+            "email": "nitin.sharma@purplecommerce.com",
+            "role": "Magento 2 Developer."
+        }
+    ],
+    "autoload": {
+      "files": [ "registration.php" ],
+      "psr-4": {
+        "PurpleCommerce\\ProductEnquiry\\": ""
+      }
+    }
+  }
