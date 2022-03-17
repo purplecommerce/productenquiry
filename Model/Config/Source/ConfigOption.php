@@ -1,5 +1,6 @@
 <?php
 namespace PurpleCommerce\ProductEnquiry\Model\Config\Source;
+
 use Magento\Catalog\Api\CategoryListInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Option\ArrayInterface;
@@ -18,22 +19,21 @@ class ConfigOption implements ArrayInterface
     public function __construct(
         CategoryListInterface $categoryList,
         SearchCriteriaBuilder $searchCriteriaBuilder
-    )
-	{
+    ) {
         $this->categoryList = $categoryList;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-	}
+    }
     /**
      * @return array
-    */
+     */
     public function toOptionArray()
     {
         $options=[];
         $categoryList = $this->getAllSystemCategory();
         if ($categoryList->getTotalCount()) {
-            foreach ($categoryList->getItems() as $category){
+            foreach ($categoryList->getItems() as $category) {
                 // var_dump($category->getData());
-                $options[] = 
+                $options[] =
                     [
                         'label' => $category->getName(),
                         'value' => $category->getId()
@@ -41,8 +41,6 @@ class ConfigOption implements ArrayInterface
                 ;
             }
         }
-        
-
         return $options;
     }
 
@@ -53,7 +51,9 @@ class ConfigOption implements ArrayInterface
             $searchCriteria = $this->searchCriteriaBuilder->create();
             $categoryList = $this->categoryList->getList($searchCriteria);
         } catch (Exception $exception) {
-            throw new Exception($exception->getMessage());
+            // @codingStandardsIgnoreStart
+            throw new Exception('Something went wrong. Try after sometime.');
+            // @codingStandardsIgnoreEnd
         }
  
         return $categoryList;

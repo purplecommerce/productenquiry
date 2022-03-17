@@ -9,7 +9,8 @@ interface ProductEnquiryRepositoryInterface
 {
     /**
      * Save ProductEnquiry
-     * @param \PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquiryInterface $changelog
+     *
+     * @param  \PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquiryInterface $changelog
      * @return \PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquiryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -19,7 +20,8 @@ interface ProductEnquiryRepositoryInterface
 
     /**
      * Retrieve ProductEnquiry
-     * @param string $EntityId
+     *
+     * @param  string $EntityId
      * @return \PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquiryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -27,7 +29,8 @@ interface ProductEnquiryRepositoryInterface
 
     /**
      * Retrieve ProductEnquiry matching the specified criteria.
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     *
+     * @param  \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
      * @return \PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquirySearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -37,7 +40,8 @@ interface ProductEnquiryRepositoryInterface
 
     /**
      * Delete Changelog
-     * @param \PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquiryInterface $changelog
+     *
+     * @param  \PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquiryInterface $changelog
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -47,16 +51,18 @@ interface ProductEnquiryRepositoryInterface
 
     /**
      * Delete Changelog by ID
-     * @param string $changelogId
+     *
+     * @param  string $changelogId
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function deleteById($changelogId);
 
-/**
+    /**
      * Delete Changelog by ID
-     * @param string $changelogId
+     *
+     * @param  string $changelogId
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\LocalizedException

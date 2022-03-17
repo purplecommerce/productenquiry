@@ -1,46 +1,47 @@
 <?php
 namespace PurpleCommerce\ProductEnquiry\Block;
+
 class Index extends \Magento\Framework\View\Element\Template
 {
     protected $helper;
     protected $imgHelper;
     protected $_productloader;
     protected $_registry;
-	public function __construct(
+    public function __construct(
         \PurpleCommerce\ProductEnquiry\Helper\Data $helperData,
         \Magento\Framework\Registry $registry,
         \Magento\Catalog\Helper\Image $imgData,
         \Magento\Catalog\Model\ProductFactory $_productloader,
         \Magento\Framework\View\Element\Template\Context $context
-    )
-	{
+    ) {
         $this->helper = $helperData;
         $this->imgHelper = $imgData;
         $this->_registry = $registry;
         $this->_productloader = $_productloader;
-		parent::__construct($context);
-	}
+        parent::__construct($context);
+    }
 
-	public function sayHello()
-	{
-		return __('Hello World');
-	}
+    public function sayHello()
+    {
+        return __('Hello World');
+    }
     public function isModuleEnabled()
     {
         return $this->helper->isModuleEnabled();
     }
 
     public function getCurrentCategory()
-    {        
+    {
         return $this->_registry->registry('current_category');
     }
     
     public function getCurrentProduct()
-    {        
+    {
         return $this->_registry->registry('current_product');
-    } 
+    }
 
-    public function getProductData(){
+    public function getProductData()
+    {
         $currentProd=$this->_registry->registry('current_product');
         $product=$this->_productloader->create()->load($currentProd->getId());
         $imageUrl = $this->imgHelper->init($product, 'product_page_image_small')
@@ -55,7 +56,7 @@ class Index extends \Magento\Framework\View\Element\Template
         return $result;
     }
 
-    
+    // @codingStandardsIgnoreStart
     public function getPopup()
     {
         $_product=$this->getCurrentProduct();
@@ -73,7 +74,7 @@ class Index extends \Magento\Framework\View\Element\Template
                         <p style='font-size: 13px;opacity: 0.6;'>".$this->getFromDesc()."</p>
                         </div>";
                         
-        if($this->showProdData()){
+        if ($this->showProdData()) {
             $prodData=$this->getProductData();
             $html.="<div class='cus-pop-img'>
                         <img src='".$prodData['img']."'>
@@ -87,22 +88,22 @@ class Index extends \Magento\Framework\View\Element\Template
                     </div></div>";
         }
         $customfileds='';
-        if($this->getCustomOne()!=''){
+        if ($this->getCustomOne()!='') {
             $customfileds.="<div class='cus-pop-field'>
                                 <input type='text' required name='customone' placeholder='".$this->getCustomOne()."' />
                             </div>";
         }
-        if($this->getCustomTwo()!=''){
+        if ($this->getCustomTwo()!='') {
             $customfileds.="<div class='cus-pop-field'>
                                 <input type='text' required name='customtwo' placeholder='".$this->getCustomTwo()."' />
                             </div>";
         }
-        if($this->getCustomThree()!=''){
+        if ($this->getCustomThree()!='') {
             $customfileds.="<div class='cus-pop-field'>
                                 <input type='text' required name='customthree' placeholder='".$this->getCustomThree()."' />
                             </div>";
         }
-        if($this->getCustomFour()!=''){
+        if ($this->getCustomFour()!='') {
             $customfileds.="<div class='cus-pop-field'>
                                 <input type='text' required name='customfour' placeholder='".$this->getCustomFour()."' />
                             </div>";
@@ -214,12 +215,14 @@ class Index extends \Magento\Framework\View\Element\Template
                 </script>";
         return $html;
     }
+    // @codingStandardsIgnoreEnd
 
     public function isForAll()
     {
         return $this->helper->isForAll();
     }
-    public function getFromDesc(){
+    public function getFromDesc()
+    {
         return $this->helper->getFromDesc();
     }
 
@@ -241,12 +244,11 @@ class Index extends \Magento\Framework\View\Element\Template
     }
     public function getFormTitle()
     {
-        if($this->helper->getFormTitle()==''){
+        if ($this->helper->getFormTitle()=='') {
             return 'Enquiry Form';
-        }else{
+        } else {
             return $this->helper->getFormTitle();
         }
-        
     }
     public function showProdData()
     {

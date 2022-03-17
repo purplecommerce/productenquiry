@@ -6,13 +6,11 @@
  */
 namespace PurpleCommerce\ProductEnquiry\Controller\Index;
 
-
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
 use Magento\Framework\App\Request\DataPersistorInterface;
-
 
 class Index extends Action
 {
@@ -24,7 +22,6 @@ class Index extends Action
     protected $context;
     private $fileUploaderFactory;
     private $fileSystem;
-
 
     /**
      * @var \Magento\Framework\Mail\Template\TransportBuilder
@@ -53,7 +50,7 @@ class Index extends Action
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      */
 
-     public function __construct(
+    public function __construct(
         \Magento\Framework\App\Action\Context $context,
         Filesystem $fileSystem,
         \PurpleCommerce\ProductEnquiry\Block\Index $PIblock,
@@ -83,75 +80,73 @@ class Index extends Action
         // print_r($post);
         // echo "</pre>";
         $query=[];
-        if($post['fullname']){
+        if ($post['fullname']) {
             $query['name']=$post['fullname'];
         }
-        if($post['phone']){
+        if ($post['phone']) {
             $query['telephone']=$post['phone'];
         }
-        if($post['email']){
+        if ($post['email']) {
             $query['email']=$post['email'];
         }
-        if($post['subject']){
+        if ($post['subject']) {
             $query['subject']=$post['subject'];
         }
-        if($post['message']){
+        if ($post['message']) {
             $query['message']=$post['message'];
         }
         $query['status']=0;
         $query['created_at']=date("Y-m-d H:i:s");
         // die;
         //--------->db insertion
-        if($query){
+        if ($query) {
             
             $this->model->setData($query);
             $saved=$this->model->Save();
-            
             
         }
         //--------->
         //--------->email data creation
        
-        if($this->piblock->sendEmailToAdmin()){
+        if ($this->piblock->sendEmailToAdmin()) {
             $txt = '<table>';
-            if($post['psku']){
-                $txt.='<tr><td><strong>Product SKU</strong>:'.$post['psku'].'</td></tr>'; 
+            if ($post['psku']) {
+                $txt.='<tr><td><strong>Product SKU</strong>:'.$post['psku'].'</td></tr>';
             }
-            if($post['pname']){
-                $txt.='<tr><td><strong>Product Name</strong>:'.$post['pname'].'</td></tr>'; 
+            if ($post['pname']) {
+                $txt.='<tr><td><strong>Product Name</strong>:'.$post['pname'].'</td></tr>';
             }
-            if($post['fullname']){
-                $txt.='<tr><td><strong>Name</strong>:'.$post['fullname'].'</td></tr>'; 
+            if ($post['fullname']) {
+                $txt.='<tr><td><strong>Name</strong>:'.$post['fullname'].'</td></tr>';
             }
-            if($post['email']){
-                $txt.='<tr><td><strong>Email</strong>:'.$post['email'].'</td></tr>'; 
+            if ($post['email']) {
+                $txt.='<tr><td><strong>Email</strong>:'.$post['email'].'</td></tr>';
             }
-            if($post['phone']){
-                $txt.='<tr><td><strong>Phone</strong>:'.$post['phone'].'</td></tr>'; 
+            if ($post['phone']) {
+                $txt.='<tr><td><strong>Phone</strong>:'.$post['phone'].'</td></tr>';
             }
-            if($post['subject']){
-                $txt.='<tr><td><strong>Subject</strong>:'.$post['subject'].'</td></tr>'; 
+            if ($post['subject']) {
+                $txt.='<tr><td><strong>Subject</strong>:'.$post['subject'].'</td></tr>';
             }
-            if(isset($post['message'])){
-                $txt.='<tr><td><strong>Message</strong>:'.$post['message'].'</td></tr>'; 
+            if (isset($post['message'])) {
+                $txt.='<tr><td><strong>Message</strong>:'.$post['message'].'</td></tr>';
             }
-            if(isset($post['customone'])){
-                $txt.='<tr><td><strong>Custom Filed 1</strong>:'.$post['customtwo'].'</td></tr>'; 
+            if (isset($post['customone'])) {
+                $txt.='<tr><td><strong>Custom Filed 1</strong>:'.$post['customtwo'].'</td></tr>';
             }
-            if(isset($post['customtwo'])){
-                $txt.='<tr><td><strong>Custom Filed 2</strong>:'.$post['customtwo'].'</td></tr>'; 
+            if (isset($post['customtwo'])) {
+                $txt.='<tr><td><strong>Custom Filed 2</strong>:'.$post['customtwo'].'</td></tr>';
             }
-            if(isset($post['customthree'])){
-                $txt.='<tr><td><strong>Custom Filed 3</strong>:'.$post['customthree'].'</td></tr>'; 
+            if (isset($post['customthree'])) {
+                $txt.='<tr><td><strong>Custom Filed 3</strong>:'.$post['customthree'].'</td></tr>';
             }
-            if(isset($post['customfour'])){
-                $txt.='<tr><td><strong>Custom Filed 4</strong>:'.$post['customfour'].'</td></tr>'; 
+            if (isset($post['customfour'])) {
+                $txt.='<tr><td><strong>Custom Filed 4</strong>:'.$post['customfour'].'</td></tr>';
             }
             
             $txt.='</table>';
             
             $tmpl=1;
-            
             
             $message=$txt;
             $adminSubject = 'Product Enquiry for Sku: '.$post['psku'];
@@ -165,19 +160,19 @@ class Index extends Action
                         'subject' => $adminSubject,
                         'message'   => $message
                     ];
-            $from = ['email' => $fromEmail, 'name' => $post['fullname']];
+             $from = ['email' => $fromEmail, 'name' => $post['fullname']];
             // $customerFrom = ['email' => $custfrom, 'name' => "The Shop India"];
-            $to=$this->scopeConfig->getValue(
-                'trans_email/ident_sales/email',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            );
+             $to=$this->scopeConfig->getValue(
+                 'trans_email/ident_sales/email',
+                 \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+             );
     
             // if(!empty($this->piblock->getAdminEmail())){
             //     $to = $this->piblock->getAdminEmail();
             // }
-            if(!empty($this->piblock->getCC())){
+            if (!empty($this->piblock->getCC())) {
                 $ccs=   $this->piblock->getCC();
-            }else{
+            } else {
                 $ccs='';
             }
             
@@ -187,65 +182,66 @@ class Index extends Action
              $templateOptions = [
               'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
               'store' => 1
-            ];
-            $postObject = new \Magento\Framework\DataObject();
-            $postObject->setData($templateVars);
+             ];
+             $postObject = new \Magento\Framework\DataObject();
+             $postObject->setData($templateVars);
     
-            $transport = $this->_transportBuilder->setTemplateIdentifier('piemail_template')
+             $transport = $this->_transportBuilder->setTemplateIdentifier('piemail_template')
                     ->setTemplateOptions($templateOptions)
                     ->setTemplateVars(['data' => $postObject])
                     ->setFrom($from)
-                    ->addTo($to) 
-                    ->addCc($ccs)            
+                    ->addTo($to)
+                    ->addCc($ccs)
                     ->getTransport();
-            $transport->sendMessage();
+             $transport->sendMessage();
     
-            $this->inlineTranslation->resume();
+             $this->inlineTranslation->resume();
         }
-        if($this->piblock->isAutoRespEnable()){
+        if ($this->piblock->isAutoRespEnable()) {
             $From='nitin.sharma@purplecommerce.com';
             $To=$post['email'];
             $txt = '<table>';
             $tmpl=1;
-            if($this->piblock->autoRespMessage()){
-                $txt.='<tr><td><strong>'.$this->piblock->autoRespMessage().'</strong></td></tr>'; 
+            if ($this->piblock->autoRespMessage()) {
+                $txt.='<tr><td><strong>'.$this->piblock->autoRespMessage().'</strong></td></tr>';
             }
             
             $txt.='</table>';
             $message=$txt;
-            $userSubject= 'Thank you for enquiring '.$post['psku']; 
+            $userSubject= 'Thank you for enquiring '.$post['psku'];
             // $this->inlineTranslation->suspend();
             $storeScopea = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
     
              $templateOptionsa = [
               'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
               'store' => 1
-            ];
-            $templateVarsa = [
+             ];
+             $templateVarsa = [
                 'store' => 1,
                 'customer_name' => $post['fullname'],
                 'subject' => $userSubject,
                 'message'   => $message
-            ];
-            $froma = ['email' => $From, 'name' => 'Product Enquiry Response'];
-            $postObjecta = new \Magento\Framework\DataObject();
-            $postObjecta->setData($templateVarsa);
-            $transport1 = $this->_transportBuilder->setTemplateIdentifier('piemail_template')
+             ];
+             $froma = ['email' => $From, 'name' => 'Product Enquiry Response'];
+             $postObjecta = new \Magento\Framework\DataObject();
+             $postObjecta->setData($templateVarsa);
+             $transport1 = $this->_transportBuilder->setTemplateIdentifier('piemail_template')
                     ->setTemplateOptions($templateOptionsa)
                     ->setTemplateVars(['data' => $postObjecta])
                     ->setFrom($froma)
-                    ->addTo($To)             
+                    ->addTo($To)
                     ->getTransport();
-            $transport1->sendMessage();
-            $this->inlineTranslation->resume();
+             $transport1->sendMessage();
+             $this->inlineTranslation->resume();
             
         }
         //--------->
-        if(!empty($this->piblock->getSuccessMsg())){
+        // @codingStandardsIgnoreStart
+        if (!empty($this->piblock->getSuccessMsg())) {
             echo $this->piblock->getSuccessMsg();
-        }else{
+        } else {
             echo 'Form successfully submitted';
         }
+        // @codingStandardsIgnoreEnd
     }
-
 }

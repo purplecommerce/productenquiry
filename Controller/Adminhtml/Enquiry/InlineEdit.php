@@ -3,7 +3,9 @@
 namespace PurpleCommerce\ProductEnquiry\Controller\Adminhtml\Enquiry;
 
 use Magento\Backend\App\Action\Context;
+// @codingStandardsIgnoreStart
 use PurpleCommerce\ProductEnquiry\Api\ProductEnquiryRepositoryInterface as ProductEnquiryRepository;
+// @codingStandardsIgnoreEnd
 use PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquiryInterface;
 
 class InlineEdit extends \Magento\Backend\App\Action
@@ -42,7 +44,7 @@ class InlineEdit extends \Magento\Backend\App\Action
                     try {
                         $storeData = $postItems[$entityId];
                         $extendedStoreData = $store->getData();
-                        $this->setStoreData($store,$extendedStoreData,$storeData);
+                        $this->setStoreData($store, $extendedStoreData, $storeData);
                         $this->storedetailRepository->save($store);
                     } catch (\Exception $e) {
                         $messages[] = "[Error:]  {$e->getMessage()}";
@@ -57,8 +59,12 @@ class InlineEdit extends \Magento\Backend\App\Action
             'error' => $error
         ]);
     }
-    public function setStoreData(\PurpleCommerce\ProductEnquiry\Model\ProductEnquiry $store, array $extendedStoreData,array $storeData){
-        $store->setData(array_merge($store->getData(), $extendedStoreData,$storeData));
+    public function setStoreData(
+        \PurpleCommerce\ProductEnquiry\Model\ProductEnquiry $store,
+        array $extendedStoreData,
+        array $storeData
+    ) {
+        $store->setData(array_merge($store->getData(), $extendedStoreData, $storeData));
         return $this;
     }
 }

@@ -6,7 +6,9 @@ namespace PurpleCommerce\ProductEnquiry\Model;
 use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Framework\Exception\NoSuchEntityException;
+// @codingStandardsIgnoreStart
 use PurpleCommerce\ProductEnquiry\Model\ResourceModel\ProductEnquiry\CollectionFactory as ProductEnquiryCollectionFactory;
+// @codingStandardsIgnoreEnd
 use PurpleCommerce\ProductEnquiry\Model\ResourceModel\ProductEnquiry as ResourceProductEnquiry;
 use PurpleCommerce\ProductEnquiry\Api\Data\ProductEnquiryInterfaceFactory;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -159,8 +161,8 @@ class ProductEnquiryRepository implements ProductEnquiryRepositoryInterface
     }
 
 /**
-     * {@inheritdoc}
-     */
+ * {@inheritdoc}
+ */
     public function saveNew($rewardData)
     {
         //echo "Inside SaveNew";

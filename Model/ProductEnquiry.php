@@ -36,7 +36,9 @@ class ProductEnquiry extends \Magento\Framework\Model\AbstractModel implements P
      */
     protected function _construct()
     {
+        // @codingStandardsIgnoreStart
         $this->_init('PurpleCommerce\ProductEnquiry\Model\ResourceModel\ProductEnquiry');
+        // @codingStandardsIgnoreEnd
     }
     /**
      * Get EntityId.

@@ -73,7 +73,7 @@ interface ProductEnquiryInterface
 
     /**
      * Set PublishDate.
-     * 
+     *
      * @return varchar
      */
     public function getMessage();
@@ -90,7 +90,6 @@ interface ProductEnquiryInterface
      * Set PublishDate.
      */
     public function setTelephone($telephone);
-    
 
     /**
      * Get Status.

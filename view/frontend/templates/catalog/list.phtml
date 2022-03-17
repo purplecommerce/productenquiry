@@ -3,8 +3,11 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
+// phpcs:ignoreFile
+
 use Magento\Framework\App\Action\Action;
 
+// @codingStandardsIgnoreStart
 ?>
 <?php
 /**
@@ -22,7 +25,7 @@ $_helper = $block->getData('outputHelper');
 ?>
 <?php
     //product enquiry
-    $PIblock= $this->getLayout()->createBlock('\PurpleCommerce\ProductEnquiry\Block\Index');    
+    $PIblock= $this->getLayout()->createBlock('\PurpleCommerce\ProductEnquiry\Block\Index');
         $html = $PIblock->sayHello();
         // die;
         
@@ -103,20 +106,20 @@ $_helper = $block->getData('outputHelper');
                                                     <form class='form-horizontal'><div class='cus-pop-field'>
                                                     <p style='font-size: 13px;opacity: 0.6;'>".$PIblock->getFromDesc()."</p>
                                                     </div>";
-                                            if($PIblock->showProdData()){
-                                                $objectManager =\Magento\Framework\App\ObjectManager::getInstance();
-                                                $helperImport = $objectManager->get('\Magento\Catalog\Helper\Image');
-                                                $imageUrl = $helperImport->init($product, 'product_page_image_small')
-                                                ->setImageFile($product->getSmallImage()) // image,small_image,thumbnail
-                                                ->resize(100)
-                                                ->getUrl();
-                                                $prodData=[
-                                                    "name"=>$product->getName(),
-                                                    "sku"=>$product->getSku(),
-                                                    "img"=>$imageUrl
-                                                ];
-                                                // $prodData=$this->getProductData();
-                                                $html.="<div class='cus-pop-img'>
+                        if ($PIblock->showProdData()) {
+                            $objectManager =\Magento\Framework\App\ObjectManager::getInstance();
+                            $helperImport = $objectManager->get('\Magento\Catalog\Helper\Image');
+                            $imageUrl = $helperImport->init($product, 'product_page_image_small')
+                            ->setImageFile($product->getSmallImage()) // image,small_image,thumbnail
+                            ->resize(100)
+                            ->getUrl();
+                            $prodData=[
+                                "name"=>$product->getName(),
+                                "sku"=>$product->getSku(),
+                                "img"=>$imageUrl
+                            ];
+                            // $prodData=$this->getProductData();
+                            $html.="<div class='cus-pop-img'>
                                                             <img src='".$prodData['img']."'>
                                                         </div>
                                                         <div class='cus-pop-para'>
@@ -126,28 +129,28 @@ $_helper = $block->getData('outputHelper');
                                                         <div>
                                                             Product Sku:".$prodData['sku']."
                                                         </div></div>";
-                                            }
+                        }
                                             $customfileds='';
-                                            if($PIblock->getCustomOne()!=''){
-                                                $customfileds.="<div class='cus-pop-field'>
+                        if ($PIblock->getCustomOne()!='') {
+                            $customfileds.="<div class='cus-pop-field'>
                                                                     <input type='text' id='cusone".$_product->getId()."' required name='customone' placeholder='".$PIblock->getCustomOne()."' />
                                                                 </div>";
-                                            }
-                                            if($PIblock->getCustomTwo()!=''){
-                                                $customfileds.="<div class='cus-pop-field'>
+                        }
+                        if ($PIblock->getCustomTwo()!='') {
+                            $customfileds.="<div class='cus-pop-field'>
                                                                     <input type='text' id='custwo".$_product->getId()."' required name='customtwo' placeholder='".$PIblock->getCustomTwo()."' />
                                                                 </div>";
-                                            }
-                                            if($PIblock->getCustomThree()!=''){
-                                                $customfileds.="<div class='cus-pop-field'>
+                        }
+                        if ($PIblock->getCustomThree()!='') {
+                            $customfileds.="<div class='cus-pop-field'>
                                                                     <input type='text' id='custhree".$_product->getId()."' required name='customthree' placeholder='".$PIblock->getCustomThree()."' />
                                                                 </div>";
-                                            }
-                                            if($PIblock->getCustomFour()!=''){
-                                                $customfileds.="<div class='cus-pop-field'>
+                        }
+                        if ($PIblock->getCustomFour()!='') {
+                            $customfileds.="<div class='cus-pop-field'>
                                                                     <input type='text' id='cusfour".$_product->getId()."' required name='customfour' placeholder='".$PIblock->getCustomFour()."' />
                                                                 </div>";
-                                            }
+                        }
                                             $html.="<input type='hidden' name='pname' id='pname".$_product->getId()."' value='".$prodData['name']."'>
                                                         <input type='hidden' name='psku' id='psku".$_product->getId()."' value='".$prodData['sku']."'>
                                                         <div class='cus-pop-field'>
@@ -177,37 +180,37 @@ $_helper = $block->getData('outputHelper');
                                             
                                             ";
                                         
-                            if($PIblock->isModuleEnabled()){ 
-                                $formtitle=$PIblock->getFormTitle();
-                                if($PIblock->isOnListing()){
+                        if ($PIblock->isModuleEnabled()) {
+                            $formtitle=$PIblock->getFormTitle();
+                            if ($PIblock->isOnListing()) {
                                    
-                                    if($PIblock->isForAll()){
-                                        echo $html;
-                                    }else{
+                                if ($PIblock->isForAll()) {
+                                    echo $html;
+                                } else {
                                         
-                                        $categories=$PIblock->visibleCategories();
-                                        $categories = explode(',',$categories);
-                                        // $currentProduct=$block->getCurrentProduct();
-                                        $currentCat=$product->getCategoryIds();
-                                        // echo "here";
-                                        // echo '<pre>';
-                                        // print_r($categories);
-                                        // echo '<pre>';
-                                        // print_r($currentCat);
-                                        $result=array_intersect($categories,$currentCat);
-                                        // echo '<pre>';
-                                        // print_r($result);
-                                        if(count($result)>0){
+                                    $categories=$PIblock->visibleCategories();
+                                    $categories = explode(',', $categories);
+                                    // $currentProduct=$block->getCurrentProduct();
+                                    $currentCat=$product->getCategoryIds();
+                                    // echo "here";
+                                    // echo '<pre>';
+                                    // print_r($categories);
+                                    // echo '<pre>';
+                                    // print_r($currentCat);
+                                    $result=array_intersect($categories, $currentCat);
+                                    // echo '<pre>';
+                                    // print_r($result);
+                                    if (count($result)>0) {
 
-                                            echo $html;
-                                        }
+                                        echo $html;
                                     }
-                                }else{
-                                    $html= '12';
                                 }
-                            }else{
-                                $html= '2';
+                            } else {
+                                $html= '12';
                             }
+                        } else {
+                            $html= '2';
+                        }
 
                             //
                         ?>
@@ -314,7 +317,7 @@ $_helper = $block->getData('outputHelper');
         }
     }
     </script>
-<?php endif; ?>
+<?php endif;// @codingStandardsIgnoreEnd ?>
 
 <script>
         require(
@@ -328,7 +331,9 @@ $_helper = $block->getData('outputHelper');
             ) {
                 // console.log("here");
                 // alert("ues");
+                // @codingStandardsIgnoreStart
                 var ftitle='<?php echo $formtitle;?>';
+                // @codingStandardsIgnoreEnd
                 var options = {
                     type: 'popup',
                     responsive: true,

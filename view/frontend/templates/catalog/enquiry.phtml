@@ -8,33 +8,35 @@
 /** @var \PurpleCommerce\ProductEnquiry\Block\Index $block */
 ?>
 <?php
-    if($block->isModuleEnabled()){ 
-        if($block->isOnDetail()){
-            if($block->isForAll()){
+if ($block->isModuleEnabled()) {
+    if ($block->isOnDetail()) {
+        if ($block->isForAll()) {
+            // @codingStandardsIgnoreStart
+            echo $block->getPopup();
+            // @codingStandardsIgnoreEnd
+        } else {
+            $categories=$block->visibleCategories();
+            $categories = explode(',', $categories);
+            $currentProduct=$block->getCurrentProduct();
+            $currentCat=$currentProduct->getCategoryIds();
+            // echo "here";
+            // echo '<pre>';
+            // print_r($categories);
+            // echo '<pre>';
+            // print_r($currentCat);
+            $result=array_intersect($categories, $currentCat);
+            // echo '<pre>';
+            // print_r($result);
+            if (count($result)>0) {
+               // @codingStandardsIgnoreStart
                 echo $block->getPopup();
-            }else{
-                $categories=$block->visibleCategories();
-                $categories = explode(',',$categories);
-                $currentProduct=$block->getCurrentProduct();
-                $currentCat=$currentProduct->getCategoryIds();
-                // echo "here";
-                // echo '<pre>';
-                // print_r($categories);
-                // echo '<pre>';
-                // print_r($currentCat);
-                $result=array_intersect($categories,$currentCat);
-                // echo '<pre>';
-                // print_r($result);
-                if(count($result)>0){
-                    echo $block->getPopup();
-                }
+                // @codingStandardsIgnoreEnd
             }
-        }else{
-
         }
-    }else{
-        echo 'no';
     }
+} else {
+    echo 'no';
+}
 
 ?>
     
