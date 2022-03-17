@@ -1,15 +1,15 @@
 {
     "name": "purplecommerce/ProductEnquiry",
-    "description": "A module which allow to add ProductEnquiry and display them through widget",
+    "description": "Magento 2 product enquiry module help you enable enquiry for products. The product page/listing page will allow customers to enquire about the product before making an informed decision",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "keywords": [
         "magento 2",
         "magento",
+        "Product Enquiry",
         "ProductEnquiry",
-        "upload ProductEnquiry",
-        "add ProductEnquiry",
-        "how to add ProductEnquiry in magento 2"
+        "Magento 2 Product Enquiry Extension",
+        "how to add Product Enquiry in magento 2"
     ],
     "type": "magento2-module",
     "version": "1.0.1",
