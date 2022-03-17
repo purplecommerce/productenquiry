@@ -1,5 +1,5 @@
 {
-    "name": "purplecommerce/ProductEnquiry",
+    "name": "purplecommerce/productenquiry",
     "description": "Magento 2 product enquiry module help you enable enquiry for products. The product page/listing page will allow customers to enquire about the product before making an informed decision",
     "minimum-stability": "dev",
     "prefer-stable": true,
